@@ -95,13 +95,7 @@ class Http {
     const body: TypeSendBody = { m };
     callback && callback(data, body);   // 自定义的参数处理回调
     // 如果修改headers，就会多一次OPTIONS预检请求
-    fetch(this.params.src, {
-      method: 'POST',
-      // headers: {
-      //   'Content-Type': 'application/json',
-      // },
-      body: JSON.stringify(body),
-    });
+    navigator.sendBeacon(this.params.src, JSON.stringify(body));
   }
   /**
    * 组装性能变量
