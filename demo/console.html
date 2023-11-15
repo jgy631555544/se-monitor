@@ -1,0 +1,49 @@
+<!--
+ * @Author: strick
+ * @LastEditors: strick
+ * @Date: 2023-01-13 16:32:08
+ * @LastEditTime: 2023-07-03 10:51:31
+ * @Description: 监控打印
+ * @FilePath: /web/shin-monitor/demo/console.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>监控打印</title>
+    <script src="../dist/shin.umd.js"></script>
+    <script>
+        // shin.track({name:'666'})
+        shin.setParams({
+          token: 'pwstrick',
+          crash: {
+            isOpen: false
+          },
+          console: {
+            isFilterLogFunc: (desc) => desc && desc.indexOf('Agora-SDK') >= 0
+          }
+        });
+        console.log('test', 'pwstrick');
+        console.log({ name: 'strick' });
+        console.error({'msg': '自定义错误'});
+        console.error(new Error('error 504'));
+        Promise.reject('666');
+        // new Promise(() => {
+        //     throw e;
+        // }).catch(() => {
+        //     const error = new Error('内部错误');
+        //     error.response = {
+        //         request: {
+        //             ajax: {
+        //                 url: 'xxx'
+        //             }
+        //         }};
+        //     error.status = 500;
+        //     throw error;
+        // });
+        shin.track('解析请求体出错:',{name:'888'})
+    </script>
+</head>
+<body>
+</body>
+</html>

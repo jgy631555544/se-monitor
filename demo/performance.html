@@ -1,0 +1,36 @@
+<!--
+ * @Author: strick
+ * @LastEditors: strick
+ * @Date: 2023-01-13 16:32:08
+ * @LastEditTime: 2023-07-06 11:05:07
+ * @Description: 性能监控
+ * @FilePath: /web/shin-monitor/demo/performance.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>性能监控</title>
+    <script src="../dist/shin.umd.js"></script>
+    <script>
+        shin.setParams({
+          token: 'pwstrick',
+          pkey: '7c891ae43d330f73',
+          rate: 10,
+          record: {
+            isOpen: true,
+            isSendInPerformance: true
+          },
+          console: {
+            isOpen: false
+          },
+          crash: {
+            isOpen: false
+          }
+        });
+    </script>
+</head>
+<body>
+    <img src="./img/5.png" width="800" />
+</body>
+</html>

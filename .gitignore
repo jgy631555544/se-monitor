@@ -1,0 +1,11 @@
+
+!index.d.ts
+.rpt2_cache
+coverage
+node_modules
+.nyc_output
+typings
+*custom.ts
+*custom.html
+.idea
+dist
