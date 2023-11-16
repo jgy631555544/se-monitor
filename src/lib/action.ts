@@ -22,6 +22,29 @@ class ActionMonitor {
     this.http = new Http(params);
     this.refer = location.href;
   }
+  public setParams(newParams: Partial<TypeShinParams>): void {
+    const finalParams = Object.assign({}, this.params);
+    // 对params属性及属性的属性进行合并
+    for (const key in newParams) {
+      if (Object.prototype.hasOwnProperty.call(newParams, key)) {
+        if (typeof newParams[key] === 'object' && !Array.isArray(newParams[key])) {
+          if (!finalParams[key]) {
+            finalParams[key] = {};
+          }
+          for (const nestedKey in newParams[key]) {
+            if (Object.prototype.hasOwnProperty.call(newParams[key], nestedKey)) {
+              finalParams[key][nestedKey] = newParams[key][nestedKey];
+            }
+          }
+        } else {
+          finalParams[key] = newParams[key];
+        }
+      }
+    }
+    this.params = finalParams;
+    this.http.setParams(finalParams);
+  }
+
   /**
    * 递归的将数字四舍五入小数点后两位
    */

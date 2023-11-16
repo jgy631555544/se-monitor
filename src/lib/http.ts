@@ -18,22 +18,8 @@ class Http {
   public constructor(params: TypeShinParams) {
     this.params = params;
   }
-  /**
-   * 身份标识
-   */
-  private getIdentity(): string {
-    const key = 'shin-monitor-identity';
-    // 页面级的缓存而非全站缓存
-    let identity = sessionStorage.getItem(key);
-    if (!identity) {
-      // 生成标识
-      identity = Number(Math.random().toString().substring(3, 6) + Date.now()).toString(36);
-      const { value } = this.params.identity;
-      // 与自定义的身份字段合并，自定义字段在前，便于使用 ES 的前缀查询
-      value && (identity = value + '-' + identity);
-      sessionStorage.setItem(key, identity);
-    }
-    return identity;
+  public setParams(newParams: Partial<TypeShinParams>): void {
+    this.params = Object.assign({}, this.params, newParams);
   }
   /**
    * Canvas 指纹
@@ -68,7 +54,7 @@ class Http {
    * 组装监控变量
    * https://github.com/appsignal/appsignal-frontend-monitoring
    */
-  public paramify(obj: TypeSendParams): string {
+  public paramify = (obj: TypeSendParams): string => {
     obj.author = this.params.author;
     obj.token = this.params.token;
     obj.subdir = this.params.subdir;
@@ -103,7 +89,7 @@ class Http {
   private paramifyPerformance(obj: TypeCaculateTiming): string {
     obj.token = this.params.token;
     obj.pkey = this.params.pkey;
-    obj.identity = this.getIdentity();
+    obj.identity = this.params.identity;
     obj.referer = location.href; // 来源地址
     // 静态资源列表
     const resources = performance.getEntriesByType('resource');
@@ -148,7 +134,7 @@ class Http {
    */
   private paramifyBehavior(obj: TypeBehavior): string {
     obj.pkey = this.params.pkey;
-    obj.identity = this.getIdentity();
+    obj.identity = this.params.identity;
     obj.referer = location.href; // 来源地址
     return JSON.stringify(obj);
   }

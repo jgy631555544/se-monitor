@@ -236,7 +236,7 @@ export interface TypeCaculateTiming {
   // 发送到性能参数信息
   token?: string;
   pkey?: string;
-  identity?: string;
+  identity?: TypeUser;
   referer?: string;
   resource: TypeSendResource[];
   record?: string;
@@ -245,7 +245,7 @@ export interface TypeCaculateTiming {
 export interface TypeBehavior {
   token?: string;
   pkey?: string;
-  identity?: string;
+  identity?: TypeUser;
   referer?: string;
   duration?: number;
 }

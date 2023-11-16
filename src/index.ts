@@ -53,13 +53,11 @@ const defaults: TypeShinParams = {
 // 外部可以调用的属性
 interface TypeShin {
   setParams: (params: TypeShinParams) => ActionMonitor;
-  track: (params: any) => void;
   reactError?: (err: any, info: any) => void;
   vueError?: (vue: any) => void;
 }
 const seMonitor: TypeShin = {
-  setParams,
-  track
+  setParams
 };
 /**
  * 未初始化时提醒
@@ -120,8 +118,6 @@ function setParams(params: TypeShinParams): ActionMonitor {
   action.injectRouter();    // 监听路由
   action.injectEvent();     // 监听事件
   action.injectAjax();      // 监听Ajax
-  // 手动监听
-  seMonitor.track = (params: any) => action.track(params);
   return action;
 }
 

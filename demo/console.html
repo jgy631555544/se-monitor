@@ -11,10 +11,9 @@
 <head>
     <meta charset="UTF-8">
     <title>监控打印</title>
-    <script src="../dist/shin.umd.js"></script>
+    <script src="../dist/seMonitor.umd.js"></script>
     <script>
-        // shin.track({name:'666'})
-        shin.setParams({
+        seMonitor.setParams({
           token: 'pwstrick',
           crash: {
             isOpen: false
@@ -41,7 +40,7 @@
         //     error.status = 500;
         //     throw error;
         // });
-        shin.track('解析请求体出错:',{name:'888'})
+        seMonitor.track('解析请求体出错:',{name:'888'})
     </script>
 </head>
 <body>
