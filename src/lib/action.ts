@@ -267,7 +267,8 @@ class ActionMonitor {
           req.ajax.interval = `${rounded(end - start, 2)}ms`; // 单位毫秒
           req.ajax.network = self.network();
           // 只记录6000个字符以内的响应限制，以便让 MySQL 表中的 message 字段能成功存储
-          responseText.length <= 6000 && (req.ajax.response = response);
+          // 不回传response，目前观察response无意义
+          // responseText.length <= 6000 && (req.ajax.response = response);
           // 过滤无意义的通信
           if (isFilterSendFunc && isFilterSendFunc(req)) {
             return;
